@@ -9,12 +9,15 @@ with open("../models/xgboost.pickle", "rb") as pfile:
     exec("xgboost = pickle.load(pfile)")
 xg_clas = eval('xgboost')
 
+st.write('''
+### DNA Variation Consequence Predictor
+'''
+)
 
-
-alfreq = st.slider('% of Population Carrying Allele', float(0), float(2), 1.6) / 100
-cadd = st.slider('CADD(RAW) Score', float(-6), float(45), float(2.74))
-blosum = st.slider('BLOSUM62 Score', int(-4), int(11), int(0))
-loftool = st.slider('LoFtool Score', float(0), float(1), float(0.34))
+alfreq = st.slider('% of Population Carrying Allele', float(0), float(1), 0.5) / 100
+cadd = st.slider('CADD(RAW) Score', float(-6), float(45), float(20))
+blosum = st.slider('BLOSUM62 Score', int(-4), int(11), int(3))
+loftool = st.slider('LoFtool Score', float(0), float(1), float(0.5))
 polyphen = st.selectbox('PolyPhen Category', ['Benign','Unknown','Possibly damaging','Probably damaging'])
 sift = st.selectbox('SIFT Category', ['Tolerated','Likely Tolerated','Unknown','Likely Deleterious','Deleterious'])
 poly_sift_dict = {
@@ -69,14 +72,16 @@ input_data = pd.DataFrame({
 
 pred_be = xg_clas.predict_proba(input_data)[0][0] * 100
 pred_path = xg_clas.predict_proba(input_data)[0][2] * 100
-pred_unc = xg_clas.predict_proba(input_data)[0][1] * 100
+# pred_unc = xg_clas.predict_proba(input_data)[0][1] * 100
+benign = pred_be / (pred_be + pred_path) * 100
+patho = pred_path / (pred_be + pred_path) * 100
 
 st.write(
-f'Chance that the Variant is of Benign Consequence: {pred_be:.1f}%'
+f'Chance that the Variant is of Benign Consequence: {benign:.1f}%'
 )
+# st.write(
+# f'Chance that the Variant is of Uncertain Consequence: {pred_unc:.1f}%'
+# )
 st.write(
-f'Chance that the Variant is of Uncertain Consequence: {pred_unc:.1f}%'
-)
-st.write(
-f'Chance that the Variant is of Pathogenic Consequence {pred_path:.2f}%'
+f'Chance that the Variant is of Pathogenic Consequence {patho:.1f}%'
 )
