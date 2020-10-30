@@ -11,7 +11,7 @@ This repository is organized into four parts.
     * [First Simple Model](https://github.com/jcpark376/ClinVar_project/blob/master/models/first_simple_model.ipynb)
     * [Second Model](https://github.com/jcpark376/ClinVar_project/blob/master/models/second_model.ipynb)
     * [Final Model](https://github.com/jcpark376/ClinVar_project/blob/master/models/third_model.ipynb)
-3. The [Evaluations folder](https://github.com/jcpark376/ClinVar_project/tree/master/evaluations), which contains two sub-projects that applies the model, as well as [figures](https://github.com/jcpark376/ClinVar_project/tree/master/evaluations) that well-summarizes the main takeaways from this project.
+3. The [Evaluations folder](https://github.com/jcpark376/ClinVar_project/tree/master/evaluations), which contains two sub-projects that applies the model, as well as [figures](https://github.com/jcpark376/ClinVar_project/tree/master/evaluations/figures) that well-summarizes the main takeaways from this project.
     * Evaluated data rows with low-confidence targets ([code](https://github.com/jcpark376/ClinVar_project/blob/master/evaluations/evaluate_singles.ipynb))
     * Created a [Streamlit app](https://github.com/jcpark376/ClinVar_project/blob/master/evaluations/stream.py) where users can change the variables to see how it changes chance of DNA variant will be benign vs pathogenic.
 4. The [Presentations folder](https://github.com/jcpark376/ClinVar_project/tree/master/Presentation) contains the presentation on this project in PDF and PPTX formats.
